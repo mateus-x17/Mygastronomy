@@ -1,0 +1,28 @@
+.popUpContainer{
+    /* display: flex; */
+    background-color: #faf0ca;
+    color: #004643;
+    & img{
+        height: 300px;
+        width: 100%;
+        border-radius: 4em;
+        object-fit: cover; /* ajusta a imagem para cobrir todo o espaço disponível */
+    }
+}
+
+.popUpInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 1em;
+
+    &h2{
+        margin-top: 5px;
+    }
+    & button{
+        margin: 5px auto;
+    }
+}
+.ingredientes{
+    color: rgb(70, 68, 68);
+}

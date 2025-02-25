@@ -1,0 +1,126 @@
+
+.itemConteiner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid green;
+    border-radius: 1.5em 0px;
+    padding: 10px;
+    gap: 1em;
+    margin-bottom: 1em;
+    background-color: #004643;
+    height: auto; /* Alterado para auto para melhor adaptação */
+    max-width: 100%; /* Garante que não ultrapasse a largura da tela */
+}
+
+.itemConteiner > img{
+    width: 200px;
+    height: 100%;
+    object-fit: cover; /* ajusta a imagem sem distoções*/
+    border-radius: 2em;
+}
+
+.itemConteudo{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    padding: 9px 0px 9px 9px;
+    border-radius: 1em;
+    background-color: #edee9a;
+    word-wrap: break-word; /* Garante que textos longos quebrem linha */
+}
+/* conteiner do conteudo do item */
+
+.conteinerListItens{
+    display: flex;
+    flex-direction: column;
+    /* gap: 1em; */
+}
+/* conteiner da lista de itens */
+
+
+.pageConteiner{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /*centraliza todos os itens da pagina*/
+    gap: 2em;
+}
+/* conteiner da pagina */
+
+/* conteiner com os botoes*/
+.porcoesConteiner{
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    width: 100%;
+}
+
+.porcoesButtons{
+    display: flex;
+    gap: .2em;
+}
+
+.removeItemBtn{
+    transition: background-color 0.5s, box-shadow 0.5s;
+}
+.removeItemBtn:hover{
+    background-color: #f00;
+    box-shadow: 0 0 10px rgb(209, 73, 73);
+}
+
+.confirmBtn{
+    /* position: fixed; */
+    /* deixa o btn flutuante mas n gostei */
+    /* bottom: 2em; */
+    font-size: x-large;
+    background-color: #004643;
+    margin-bottom: 2em;
+    transition: background-color 0.5s, box-shadow 0.5s;
+}
+.confirmBtn:hover{
+    background-color:#2b79b9;
+    box-shadow: 0 0 15px #004643;
+}
+
+.emptyCart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    height: 100vh;
+    & a{
+        color: #004643;
+        text-decoration: underline;
+        text-shadow: 0 0 10px #42d674;
+        transition: text-shadow 0.5s;
+    }
+    & a:hover{
+        text-shadow: 0 0 10px #039634;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .itemConteiner{
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+        align-items: center;
+        justify-content: center;
+    }
+    .itemConteudo {
+        font-size: 0.9em; /* Reduz levemente o tamanho da fonte em telas menores */
+        width: 93%;
+    }
+    .itemConteiner > img{
+        width: 250px;
+        height: auto;
+    }
+    .porcoesButtons{
+        gap: 1em;
+        margin-left: 15px;
+    }
+    
+}
+

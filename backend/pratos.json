@@ -1,0 +1,120 @@
+[
+    {
+      "nome": "Espaguete à Bolonhesa",
+      "preco": 32.50,
+      "disponivel": true,
+      "descricao": "Macarrão espaguete servido com molho à bolonhesa e queijo ralado.",
+      "ingredientes": ["espaguete", "molho de tomate", "carne moída", "queijo parmesão"],
+      "imgUrl": "/imgs/pratos/macarraoBolonhesa.png",
+      "categoria": "Massas"
+    },
+    {
+      "nome": "Pizza Margherita",
+      "preco": 45.00,
+      "disponivel": true,
+      "descricao": "Pizza clássica com molho de tomate, mussarela e manjericão fresco.",
+      "ingredientes": ["massa de pizza", "molho de tomate", "mussarela", "manjericão"],
+      "imgUrl": "/imgs/pratos/pizzaMargherita.png",
+      "categoria": "Pizzas"
+    },
+    {
+      "nome": "Salmão Grelhado",
+      "preco": 55.00,
+      "disponivel": false,
+      "descricao": "Filé de salmão grelhado acompanhado de legumes salteados.",
+      "ingredientes": ["salmão", "azeite", "legumes variados", "ervas"],
+      "imgUrl": "/imgs/pratos/grilledSalmon.png",
+      "categoria": "Peixes"
+    },
+    {
+      "nome": "Frango à Parmegiana",
+      "preco": 38.90,
+      "disponivel": true,
+      "descricao": "Peito de frango empanado, coberto com molho de tomate e queijo, servido com arroz e batatas fritas.",
+      "ingredientes": ["frango", "farinha de rosca", "molho de tomate", "queijo", "arroz", "batata"],
+      "imgUrl": "/imgs/pratos/FrangoParmegiana.png",
+      "categoria": "Carnes"
+    },
+    {
+      "nome": "Risoto de Camarão",
+      "preco": 49.90,
+      "disponivel": true,
+      "descricao": "Risoto cremoso com camarões frescos e temperos especiais.",
+      "ingredientes": ["arroz arbóreo", "camarão", "cebola", "alho", "parmesão", "creme de leite"],
+      "imgUrl": "/imgs/pratos/risotocamarao.png",
+      "categoria": "Frutos do Mar"
+    },
+    {
+      "nome": "Hambúrguer Artesanal",
+      "preco": 29.90,
+      "disponivel": true,
+      "descricao": "Pão artesanal com hambúrguer de carne, queijo, alface, tomate e molho especial.",
+      "ingredientes": ["pão artesanal", "carne bovina", "queijo cheddar", "alface", "tomate", "molho especial"],
+      "imgUrl": "/imgs/pratos/hamburguerArtesanal.png",
+      "categoria": "Sanduíches"
+    },
+    {
+      "nome": "Pão",
+      "preco": 5.00,
+      "disponivel": true,
+      "descricao": "Pão artesanal assado na hora, crocante por fora e macio por dentro.",
+      "ingredientes": ["farinha de trigo", "fermento", "água", "sal"],
+      "imgUrl": "/imgs/pratos/bread.png",
+      "categoria": "Padaria"
+    },
+    {
+      "nome": "Lasanha",
+      "preco": 40.00,
+      "disponivel": true,
+      "descricao": "Lasanha recheada com molho de tomate e queijo derretido.",
+      "ingredientes": ["massa de lasanha", "molho de tomate", "queijo mussarela", "carne moída"],
+      "imgUrl": "/imgs/pratos/lasagna.png",
+      "categoria": "Massas"
+    },
+    {
+      "nome": "Almôndegas",
+      "preco": 30.00,
+      "disponivel": true,
+      "descricao": "Almôndegas suculentas ao molho de tomate, servidas com arroz e batatas fritas.",
+      "ingredientes": ["carne moída", "ovo", "farinha de rosca", "molho de tomate", "alho"],
+      "imgUrl": "/imgs/pratos/meatBalls.png",
+      "categoria": "Carnes"
+    },
+    {
+      "nome": "Salada de Frutos do Mar",
+      "preco": 45.00,
+      "disponivel": true,
+      "descricao": "Mix de frutos do mar temperados com ervas finas e limão.",
+      "ingredientes": ["camarão", "polvo", "mexilhão", "azeite", "limão", "ervas finas"],
+      "imgUrl": "/imgs/pratos/seafoodSalad.png",
+      "categoria": "Saladas"
+    },
+    {
+      "nome": "Salada de Vegetais",
+      "preco": 25.00,
+      "disponivel": true,
+      "descricao": "Salada fresca com vegetais variados e molho especial.",
+      "ingredientes": ["alface", "tomate", "cenoura", "pepino", "molho especial"],
+      "imgUrl": "/imgs/pratos/shrimpandVegetableSalad.png",
+      "categoria": "Saladas"
+    },
+    {
+      "nome": "Peixe Espada",
+      "preco": 50.00,
+      "disponivel": true,
+      "descricao": "Filé de peixe espada grelhado, servido com legumes assados.",
+      "ingredientes": ["peixe espada", "azeite", "alho", "limão", "legumes"],
+      "imgUrl": "/imgs/pratos/swordfish.png",
+      "categoria": "Peixes"
+    },
+    {
+      "nome": "Tortellini",
+      "preco": 42.00,
+      "disponivel": true,
+      "descricao": "Massa recheada com queijo e espinafre, servida ao molho branco.",
+      "ingredientes": ["massa de tortellini", "queijo ricota", "espinafre", "molho branco"],
+      "imgUrl": "/imgs/pratos/tortellini.png",
+      "categoria": "Massas"
+    }
+
+  ]

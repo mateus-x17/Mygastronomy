@@ -1,0 +1,108 @@
+.navbarConteiner{
+    display: flex;
+    align-items: center;
+    background-color: #004643 ;
+    height: 96px;
+    padding: 1px;
+
+}
+
+.logo{
+    width: 5em;
+}
+
+.navbarItens{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+
+}
+
+.navbarlinksConteiner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em; /*espaçamento entre links*/
+    padding: 1em;
+}
+
+.navbarLink{
+    color: #f1e09b;
+}
+.navbarLink:hover{
+    text-shadow: 0 2px 10px #f1e09b;
+}
+
+/* icone de carrinho */
+.cartWrapper {
+position: relative;
+display: inline-block;
+}
+
+.cartBadge {
+position: absolute;
+top: -5px;
+right: -8px;
+background-color: red;
+color: white;
+font-size: 12px;
+font-weight: bold;
+width: 18px;
+height: 18px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/*mobile*/
+.mobileNavbarItens{
+    display: none;
+}
+.navbarMobilebtns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    font-size: xx-large;
+    /* margin: 0 5px; */
+    padding: 0.5em;
+
+}
+.navbarLink2{
+    color: #f1e09b;
+    margin-bottom: 3px;
+} /* icone de menu do mobile mais pra cima paraajustar com a altura do carrinho*/
+.drawer{
+    background-color:#004643;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 1.5em;
+    font-size: xx-large;
+    gap: 1em;
+}
+
+/**responsividade*/
+@media screen and (max-width: 600px) {
+    .navbarItens{
+        display: none;
+    }
+    .mobileNavbarItens{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    
+}
+
+
+
+

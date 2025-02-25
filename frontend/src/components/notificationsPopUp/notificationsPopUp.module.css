@@ -1,0 +1,33 @@
+.notification{
+    position: fixed; /* Fixa a notificação na tela */
+    top: 20px; /* Distância do topo */
+    right: 20px; /* Distância da direita */
+    background-color: #4caf50; /* Cor de fundo verde (sucesso) */
+    color: white; /* Texto branco */
+    padding: 12px 20px; /* Espaçamento interno */
+    border-radius: 5px; /* Borda arredondada */
+    width: 250px; /* Largura fixa */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+    font-size: 14px; /* Tamanho do texto */
+    animation: fadeInOut 3s ease-in-out; /* Animação de fade */
+  }
+  
+/* Animação de entrada e saída */
+@keyframes fadeInOut {
+0% {
+    opacity: 0;
+    transform: translateY(-10px); /* Sobe um pouco no início */
+}
+10% {
+    opacity: 1;
+    transform: translateY(0); /* Fica visível */
+}
+90% {
+    opacity: 1;
+    transform: translateY(0); /* Mantém visível */
+}
+100% {
+    opacity: 0;
+    transform: translateY(-10px); /* Desaparece no final */
+}
+}

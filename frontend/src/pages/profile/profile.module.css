@@ -1,0 +1,62 @@
+.pageContainer{
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+}/* conteiner principal - da pagina todas as informações estão */
+
+.userInfoContainer{
+    background-color: #0d6b66;
+    padding: 1em;
+    margin: 1em auto;
+}/* conteiner onde as informações do usuario estão */
+
+.orderContainer{
+    background-color: #004643;
+    color: #faf0ca;
+    padding: 2em;
+    border-radius: 2em;
+}/* conteiner onde os pedidos estão */
+
+.ordersContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5em;
+} /*conteiner com os pedidos*/
+
+.status{
+    background-color:lightblue;
+    padding: 0.5em;
+    width: fit-content;
+    border-radius: 1em;
+    font-size: large;
+    /* alinhando com icone */
+    display: flex;
+    gap: 0.2em;
+}
+.pendente{
+    background-color: #dcd918;
+}
+.cancelado{
+    background-color: #e93629;
+}
+.completo{
+    background-color: #24841e;
+}
+
+.LinkPratos{
+    text-decoration: none;
+    color: #faf0ca;
+    background-color: #004643;
+    padding: 2px;
+    border-radius: 2em;
+    width: fit-content;
+}
+@media screen and (max-width: 800px){
+    .ordersContainer{
+        display: flex;
+        flex-direction: column;
+    }
+    
+}

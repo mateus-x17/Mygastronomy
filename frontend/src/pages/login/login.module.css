@@ -1,0 +1,15 @@
+.pagAutenticacao, form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    /* height: 100vh;
+    width: 100vw; */
+    /* background-color: #000000; */
+}
+
+button:hover{
+    box-shadow: #4ed4f5 0px 0px 10px;
+    color: #faf0ce;
+}
