@@ -24,7 +24,7 @@ import { ObjectId } from "mongodb" //importa o pacote ObjectId do mongodb para g
 
     if (result.insertedId) {
         const user = await Mongo.db.collection('usuarios').findOne({_id: result.insertedId}) //busca o usuário pelo id
-        const token = jwt.sign({id: user._id}, "mygastronomy ", {expiresIn: '1h'}) //gera o token de autenticação
+        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '1h'}) //gera o token de autenticação
         // process.env.JWT_SECRET - é a chave secreta que foi gerada no arquivo .env deve substituir a string no jwt.sign
 
         return res.status(200).send({body:{
@@ -64,7 +64,7 @@ const authLogin = async (req, res) => {
         }
 
         // Gera o token de autenticação
-        const token = jwt.sign({ id: user._id }, "mygastronomy", { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         // process.env.JWT_SECRET - é a chave secreta que foi gerada no arquivo .env deve substituir a string no jwt.sing
 
         return res.status(200).json({
@@ -89,7 +89,7 @@ const verifyAuthToken = (req, res, next) => {
         return res.status(401).json({message: 'Token não informado'}) //se o token não for informado, retorna um erro
     }
     try{
-        const decoded = jwt.verify(token, "mygastronomy ") //decodifica o token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET) //decodifica o token
         // process.env.JWT_SECRET - é a chave secreta que foi gerada no arquivo .env deve substituir a string no jwt.verify
         req.user = decoded //atribui o usuário ao request
         next() //chama a próxima função

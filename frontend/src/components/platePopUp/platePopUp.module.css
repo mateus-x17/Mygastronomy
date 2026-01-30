@@ -1,28 +1,201 @@
-.popUpContainer{
-    /* display: flex; */
-    background-color: #faf0ca;
-    color: #004643;
-    & img{
-        height: 300px;
-        width: 100%;
-        border-radius: 4em;
-        object-fit: cover; /* ajusta a imagem para cobrir todo o espaço disponível */
+/* Popup Container */
+.popUpContainer {
+    background-color: var(--color-surface);
+    position: relative;
+    animation: slideUp 0.3s ease-out;
+    max-width: 500px;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.popUpInfo{
+/* Close Button */
+.closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    min-width: auto;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.closeButton:hover {
+    background-color: var(--color-error);
+}
+
+/* Image Container */
+.imageContainer {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.imageContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.popUpContainer:hover .imageContainer img {
+    transform: scale(1.05);
+}
+
+/* Info Container */
+.popUpInfo {
+    padding: var(--spacing-lg);
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
-    padding: 1em;
+    gap: var(--spacing-sm);
+}
 
-    &h2{
-        margin-top: 5px;
+.category {
+    display: inline-block;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    width: fit-content;
+}
+
+.popUpInfo h2 {
+    font-size: 1.75rem;
+    color: var(--color-primary);
+    margin-top: var(--spacing-xs);
+    line-height: 1.3;
+}
+
+.description {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Ingredients */
+.ingredientsList {
+    background-color: var(--color-background);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-xs);
+}
+
+.ingredientsLabel {
+    font-weight: 600;
+    color: var(--color-text-main);
+    font-size: 0.85rem;
+}
+
+.ingredientsList p {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin-top: 4px;
+    line-height: 1.5;
+}
+
+/* Price Row */
+.priceRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+}
+
+.addButton {
+    flex: 1;
+    min-width: 180px;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.875rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-size: 1rem;
+}
+
+.addButton:hover {
+    background-color: var(--color-primary-light);
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+    .popUpContainer {
+        max-width: 100%;
     }
-    & button{
-        margin: 5px auto;
+
+    .imageContainer {
+        height: 200px;
+    }
+
+    .popUpInfo {
+        padding: var(--spacing-md);
+    }
+
+    .popUpInfo h2 {
+        font-size: 1.4rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .priceRow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-sm);
+    }
+
+    .price {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+
+    .addButton {
+        min-width: 100%;
+        width: 100%;
     }
 }
-.ingredientes{
-    color: rgb(70, 68, 68);
+
+@media screen and (max-width: 400px) {
+    .popUpInfo h2 {
+        font-size: 1.2rem;
+    }
+
+    .imageContainer {
+        height: 160px;
+    }
 }

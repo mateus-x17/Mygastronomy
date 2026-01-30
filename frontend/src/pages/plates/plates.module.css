@@ -1,10 +1,36 @@
-
 .platesContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
 }
-/* torna os elementos filhos flexíveis e responsivos */
+
+.cardConteiner {
+    height: 100%;
+    animation: fadeIn 0.5s ease-in-out;
+    animation-fill-mode: both;
+}
+
+/* Stagger animation for cards */
+.cardConteiner:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.cardConteiner:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.cardConteiner:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.cardConteiner:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.cardConteiner:nth-child(5) {
+    animation-delay: 0.5s;
+}

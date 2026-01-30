@@ -1,83 +1,93 @@
-import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { API_BASE_URL } from '../config'
+import { useToast } from '../components/Toast/Toast'
 
 export default function authServices() {
-    const navegate = useNavigate() // cria uma função para navegação entre as rotas
-    const [authLoading, setAuthLoading] = useState(false) // estado para controlar o loading (carregamento) do login
-    const url = 'http://localhost:3000'
+    const navigate = useNavigate()
+    const [authLoading, setAuthLoading] = useState(false)
+    const toast = useToast()
+    const url = API_BASE_URL
 
-    const login = (formData) =>{
+    const login = async (formData) => {
         setAuthLoading(true)
-        fetch(`${url}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'acesss-control-allow-origin': '*' // para que o cors funcione permitindo requisições da mesma maquina
-            },
-            body: JSON.stringify(formData) // body é o corpo da requisição e JSON.stringify transforma o objeto em uma string depois transforma em json
-        })
-        .then(res => res.json()) // transforma a resposta em json
-        .then(data => {
-            console.log(data)
-            if (data.body.logged === true && data.body.token) {
-                localStorage.setItem('auth', JSON.stringify({token:data.body.token, user: data.body.user})) // seta o token no localStorage
-                // window.location.href = '/'
-                alert('Login realizado com sucesso') // exibe mensagem de login realizado com sucesso
-                navegate('/profile') // redireciona para a pagina inicial (Home)
+        try {
+            const response = await fetch(`${url}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'access-control-allow-origin': '*'
+                },
+                body: JSON.stringify(formData)
+            })
+
+            const data = await response.json()
+
+            if (response.ok && data.body?.logged === true && data.body?.token) {
+                localStorage.setItem('auth', JSON.stringify({
+                    token: data.body.token,
+                    user: data.body.user
+                }))
+                toast.success(`Bem-vindo(a), ${data.body.user?.name || 'Usuário'}!`)
+                setTimeout(() => {
+                    navigate('/profile')
+                }, 500)
             } else {
-                alert('email ou senha incorretos')
-            } // caso o login seja feito com sucesso seta o token no localStorage e redireciona para a pagina inicial (Home)
+                // Handle specific error messages from backend
+                const errorMessage = data.message || 'Erro ao realizar login'
+                toast.error(errorMessage)
+            }
+        } catch (err) {
+            console.error(err)
+            toast.error('Erro de conexão. Tente novamente.')
+        } finally {
             setAuthLoading(false)
-        }) // exibe a resposta no console e seta o estado de authLoading para false
-        .catch(err => {
-            console.log(err)
-            setAuthLoading(false)
-        })
-        .finally(() => {
-            setAuthLoading(false)
-        }) 
-    } // função para fazer o login enviando uma requisição para o servidor
+        }
+    }
 
 
-    const singIn = (formData) =>{
+    const singIn = async (formData) => {
         setAuthLoading(true)
-        fetch(`${url}/singIn`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'acesss-control-allow-origin': '*' // para que o cors funcione permitindo requisições da mesma maquina
-            },
-            body: JSON.stringify(formData) // body é o corpo da requisição e JSON.stringify transforma o objeto em uma string depois transforma em json
-        })
-        .then(res => res.json()) // transforma a resposta em json
-        .then(data => {
-            console.log(data)
-            if (data.body.logged === true && data.body.token) {
-                localStorage.setItem('auth', JSON.stringify({token:data.body.token, user: data.body.user})) // seta o token no localStorage
-                // window.location.href = '/'
-            } else {
-                alert('email ou senha incorretos')
-            } // caso o login seja feito com sucesso seta o token no localStorage e redireciona para a pagina inicial (Home)
-            setAuthLoading(false)
-        }) // exibe a resposta no console e seta o estado de authLoading para false
-        .catch(err => {
-            console.log(err)
-            setAuthLoading(false)
-        })
-        .finally(() => {
-            setAuthLoading(false)
-        }) 
-    } // função para fazer o cadastro enviando uma requisição para o servidor
+        try {
+            const response = await fetch(`${url}/singIn`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'access-control-allow-origin': '*'
+                },
+                body: JSON.stringify(formData)
+            })
 
-    const logout = () =>{
+            const data = await response.json()
+
+            if (response.ok && data.body?.logged === true && data.body?.token) {
+                localStorage.setItem('auth', JSON.stringify({
+                    token: data.body.token,
+                    user: data.body.user
+                }))
+                toast.success('Cadastro realizado com sucesso! Redirecionando...')
+                setTimeout(() => {
+                    navigate('/profile')
+                }, 1000)
+            } else {
+                // Handle specific error messages from backend
+                const errorMessage = data.message || 'Erro ao realizar cadastro'
+                toast.error(errorMessage)
+            }
+        } catch (err) {
+            console.error(err)
+            toast.error('Erro de conexão. Tente novamente.')
+        } finally {
+            setAuthLoading(false)
+        }
+    }
+
+    const logout = () => {
         localStorage.removeItem('auth')
-        console.log('logout')
-        navegate('/login')
-    } // função para fazer o logout removendo o token do localStorage e redirecionando para a pagina de login
+        toast.info('Você saiu da sua conta.')
+        navigate('/login')
+    }
 
 
-  return {singIn, logout, login, authLoading}
+    return { singIn, logout, login, authLoading }
 }
-
-

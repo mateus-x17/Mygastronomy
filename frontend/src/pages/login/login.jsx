@@ -1,96 +1,178 @@
 import React from 'react'
 import authServices from '../../services/Auth.jsx'
 import Styles from './login.module.css'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-//importa os componentes do material ui
-import { TextField } from '@mui/material' // importa o componente TextField responsavel por espaços de fomrularios
-import { Button } from '@mui/material' // importa o componente Button responsavel por espaços de fomrularios
+import { useState, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { TextField } from '@mui/material'
 import { LuLogIn } from "react-icons/lu";
+import { FaUserPlus } from "react-icons/fa";
+import { useToast } from '../../components/Toast/Toast'
 
 export default function Auth() {
   const [formType, setFormType] = useState('login')
-  const [formData, setFormData] = useState(null) // cria um estado para os dados do formulario
-  const {login, singIn, authLoading} = authServices() // chama a função de login e singIn do arquivo services/auth.jsx
-  const navegate = useNavigate() // cria uma função para navegação entre as rotas
-  const authData = JSON.parse(localStorage.getItem('auth')) // pega os dados do usuario logado no localStorage
+  const [formData, setFormData] = useState({})
+  const { login, singIn, authLoading } = authServices()
+  const navigate = useNavigate()
+  const authData = JSON.parse(localStorage.getItem('auth'))
+  const toast = useToast()
 
   useEffect(() => {
     if (authData) {
-      return navegate('/profile')
-      // window.location.href = '/profile'
-    } // caso o usuario esteja logado redireciona para a pagina de perfil
-    }, []) //caso o usuio esteja logado redireciona para a pagina de perfil
-
+      navigate('/profile')
+    }
+  }, [])
 
   const handleChangeFormType = () => {
-      if (formType === 'login') {
-        setFormType('signup')
-      } else {
-        setFormType('login')
-      }
-      console.log(formType)
-    } // troca o tipo de formulario
+    setFormData({}) // Reset form data when switching
+    if (formType === 'login') {
+      setFormType('signup')
+    } else {
+      setFormType('login')
+    }
+  }
 
-    const handleFormDataChange = (event) => {
-      setFormData({...formData, [event.target.name]: event.target.value}) 
-    } //função para alterar os dados do formulario ao ser digitado 
+  const handleFormDataChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value })
+  }
 
-    const handleSubmitForm = (event) => {
-      event.preventDefault()
-      switch (formType) {
-        case 'login':
-          login(formData) // envia requisição para o servidor
-          console.log('login')
-          setFormData({email: '', password: ''}) // reseta o formulario
-          break // caso o formulario seja de login 
+  const handleSubmitForm = (event) => {
+    event.preventDefault()
 
-        case 'signup':
-          if (formData.password !== formData.confirmPassword) {
-            alert('senhas não conferem')
-            return // caso as senhas não sejam iguais interrompe a função e não envia a requisição
-          }
-          singIn(formData) // envia requisição para o servidor
-          console.log('signup')
-          setFormData({email: '', password: '', confirmPassword: ''}) // reseta o formulario
-          break // caso o formulario seja de cadastro
-      }
-    } //função para enviar os dados para o servidor
+    // Validation
+    if (!formData.email || !formData.password) {
+      toast.warning('Preencha todos os campos obrigatórios.')
+      return
+    }
 
-    if (authLoading) {
-      return (
-        <div>
-          <h1>carregando...</h1>
-        </div>
-      )
-    } // caso o estado de authLoading seja true exibe a mensagem de carregando
+    switch (formType) {
+      case 'login':
+        login(formData)
+        break
 
-    return(
-      <div className={Styles.pagAutenticacao}>
-        {formType === 'login' ? (
-                <div className={Styles.pagAutenticacao}>
-                <h1>login</h1>
-                <form onSubmit={handleSubmitForm}>
-                  <TextField label="email" type='email' name='email' required onChange={handleFormDataChange}/>
-                  <TextField label="senha" type='password' name='password' required onChange={handleFormDataChange}/>
-                  <button type='submit'> entrar <LuLogIn/> </button>
-                  <button onClick={handleChangeFormType}> não tem uma conta ? clique aqui</button>
-                </form>
-              </div> ) : null} {/* caso o formulario seja de login exibe o formulario de login*/}
+      case 'signup':
+        if (!formData.name) {
+          toast.warning('Por favor, informe seu nome.')
+          return
+        }
+        if (formData.password.length < 6) {
+          toast.warning('A senha deve ter no mínimo 6 caracteres.')
+          return
+        }
+        if (formData.password !== formData.confirmPassword) {
+          toast.error('As senhas não conferem.')
+          return
+        }
+        singIn(formData)
+        break
+    }
+  }
 
-        {formType === 'signup' ? (
-          <div className={Styles.pagAutenticacao}>
-            <h1>cadastro</h1>
-            <form onSubmit={handleSubmitForm}>
-              <TextField label="nome" type='text' name='name' required onChange={handleFormDataChange}/>
-              <TextField label="email" type='email' name='email' required onChange={handleFormDataChange}/>
-              <TextField label="senha" type='password' name='password' required onChange={handleFormDataChange}/>
-              <TextField label="confirmar senha" type='password' name='confirmPassword' required onChange={handleFormDataChange}/>
-              <button type='submit'> cadastrar <LuLogIn/> </button>
-              <button onClick={handleChangeFormType}> já tem uma conta ? clique aqui</button>
-            </form>
-          </div> ) : null} {/*caso o formulario seja de cadastro exibe o formulario de cadastro*/}
+  if (authLoading) {
+    return (
+      <div className={Styles.loadingContainer}>
+        <div className={Styles.spinner}></div>
+        <p>Carregando...</p>
       </div>
     )
+  }
+
+  const textFieldStyle = {
+    '& .MuiOutlinedInput-root': {
+      borderRadius: '12px',
+      '&:hover fieldset': {
+        borderColor: '#004643',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#004643',
+      },
+    },
+    '& .MuiInputLabel-root.Mui-focused': {
+      color: '#004643',
+    },
+  }
+
+  return (
+    <div className={Styles.pageContainer}>
+      <div className={Styles.formCard}>
+        <div className={Styles.cardHeader}>
+          <img src="/imgs/logo.png" alt="Logo" className={Styles.logo} />
+          <h1>{formType === 'login' ? 'Bem-vindo de Volta!' : 'Crie sua Conta'}</h1>
+          <p>{formType === 'login' ? 'Entre para acessar seu perfil e pedidos' : 'Cadastre-se para fazer seus pedidos'}</p>
+        </div>
+
+        <form onSubmit={handleSubmitForm} className={Styles.form}>
+          {formType === 'signup' && (
+            <TextField
+              label="Nome Completo"
+              type='text'
+              name='name'
+              value={formData.name || ''}
+              required
+              onChange={handleFormDataChange}
+              fullWidth
+              variant="outlined"
+              sx={textFieldStyle}
+            />
+          )}
+
+          <TextField
+            label="Email"
+            type='email'
+            name='email'
+            value={formData.email || ''}
+            required
+            onChange={handleFormDataChange}
+            fullWidth
+            variant="outlined"
+            sx={textFieldStyle}
+          />
+
+          <TextField
+            label="Senha"
+            type='password'
+            name='password'
+            value={formData.password || ''}
+            required
+            onChange={handleFormDataChange}
+            fullWidth
+            variant="outlined"
+            sx={textFieldStyle}
+          />
+
+          {formType === 'signup' && (
+            <TextField
+              label="Confirmar Senha"
+              type='password'
+              name='confirmPassword'
+              value={formData.confirmPassword || ''}
+              required
+              onChange={handleFormDataChange}
+              fullWidth
+              variant="outlined"
+              sx={textFieldStyle}
+            />
+          )}
+
+          <button type='submit' className={Styles.submitButton} disabled={authLoading}>
+            {formType === 'login' ? (
+              <>Entrar <LuLogIn /></>
+            ) : (
+              <>Cadastrar <FaUserPlus /></>
+            )}
+          </button>
+        </form>
+
+        <div className={Styles.cardFooter}>
+          <p>
+            {formType === 'login' ? 'Não tem uma conta?' : 'Já possui uma conta?'}
+          </p>
+          <button onClick={handleChangeFormType} className={Styles.switchButton}>
+            {formType === 'login' ? 'Criar conta' : 'Fazer login'}
+          </button>
+        </div>
+
+        <Link to="/" className={Styles.backLink}>← Voltar para Home</Link>
+      </div>
+    </div>
+  )
 }

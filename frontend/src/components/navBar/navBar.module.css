@@ -1,108 +1,151 @@
-.navbarConteiner{
+.navbarConteiner {
     display: flex;
     align-items: center;
-    background-color: #004643 ;
-    height: 96px;
-    padding: 1px;
-
+    background-color: var(--color-primary);
+    height: 80px;
+    padding: 0 var(--spacing-sm);
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.logo{
-    width: 5em;
+.logo {
+    width: 60px;
+    transition: transform 0.3s ease;
 }
 
-.navbarItens{
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.navbarItens {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: 1280px;
     margin: 0 auto;
-
 }
 
-.navbarlinksConteiner{
+.navbarlinksConteiner {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1em; /*espaçamento entre links*/
-    padding: 1em;
+    gap: var(--spacing-lg);
 }
 
-.navbarLink{
-    color: #f1e09b;
-}
-.navbarLink:hover{
-    text-shadow: 0 2px 10px #f1e09b;
+.navbarLink {
+    color: var(--color-secondary);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-/* icone de carrinho */
+.navbarLink::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--color-secondary);
+    transition: width 0.3s ease;
+}
+
+.navbarLink:hover::after {
+    width: 100%;
+}
+
+.navbarLink:hover {
+    color: var(--color-surface);
+    text-shadow: 0 0 8px rgba(249, 188, 96, 0.4);
+}
+
+/* Icon Styles */
 .cartWrapper {
-position: relative;
-display: inline-block;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-secondary);
+    transition: transform 0.3s ease;
+}
+
+.cartWrapper:hover {
+    transform: scale(1.1);
+    color: var(--color-surface);
 }
 
 .cartBadge {
-position: absolute;
-top: -5px;
-right: -8px;
-background-color: red;
-color: white;
-font-size: 12px;
-font-weight: bold;
-width: 18px;
-height: 18px;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--color-error);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--color-primary);
 }
 
-/*mobile*/
-.mobileNavbarItens{
+/* Mobile */
+.mobileNavbarItens {
     display: none;
 }
-.navbarMobilebtns{
+
+.navbarMobilebtns {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1em;
-    font-size: xx-large;
-    /* margin: 0 5px; */
-    padding: 0.5em;
-
+    gap: var(--spacing-md);
+    font-size: 1.5rem;
+    color: var(--color-secondary);
 }
-.navbarLink2{
-    color: #f1e09b;
-    margin-bottom: 3px;
-} /* icone de menu do mobile mais pra cima paraajustar com a altura do carrinho*/
-.drawer{
-    background-color:#004643;
+
+.navbarLink2 {
+    color: var(--color-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.navbarLink2:hover {
+    color: var(--color-surface);
+}
+
+.drawer {
+    background-color: var(--color-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
-    padding: 1.5em;
-    font-size: xx-large;
-    gap: 1em;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    gap: var(--spacing-lg);
+    width: 250px;
 }
 
-/**responsividade*/
-@media screen and (max-width: 600px) {
-    .navbarItens{
+.drawer .navbarLink {
+    font-size: 1.5rem;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+    .navbarItens {
         display: none;
     }
-    .mobileNavbarItens{
+
+    .mobileNavbarItens {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
     }
-
-    
 }
-
-
-
-

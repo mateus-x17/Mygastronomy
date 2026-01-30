@@ -1,49 +1,97 @@
-.footerConteiner, .linksConteiner{
-    background-color: #004643;
-    color: #faf0ca;
+.footerConteiner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-primary);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    color: var(--color-surface);
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+    border-top: 4px solid var(--color-secondary);
+}
+
+.footerConteiner img {
+    width: 120px;
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.footerConteiner h3 {
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.25rem;
+}
+
+.linksConteiner {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.footerConteiner{
-    gap: 1em;
-    padding-bottom: 1em;
-    & img{
-        width: 8em;
-    }
-} /* conteiner pai*/
-
-.Link{
-    color: #faf0ca;
-    text-decoration: none;
+    gap: var(--spacing-xs);
 }
 
-.footerInfo{
+.Link {
+    color: #e0e0e0;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.Link:hover {
+    color: var(--color-secondary);
+    padding-left: var(--spacing-xs);
+}
+
+.footerInfo {
+    text-align: right;
     display: flex;
-    & a{
-        color: #faf0ca;
-        text-decoration: underline;
-        margin-left: 7px;
-    }
-}/* conteiner com as informações do dev */
-
-.Link:hover, .footerInfo>a:hover{
-    text-shadow: 0 3px 10px #0aada5;
+    flex-direction: column;
+    gap: var(--spacing-xs);
 }
 
-/* RESPONSIVIDADE */
-@media screen and (max-width: 768px){
-    .footerConteiner{
-        gap: 0.5em;
-    }
-    .footerInfo{
+.footerInfo p {
+    font-size: 0.9rem;
+    color: #bdbdbd;
+}
+
+.footerInfo a {
+    color: var(--color-secondary);
+    font-weight: 500;
+    position: relative;
+}
+
+.footerInfo a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    right: 0;
+    background-color: var(--color-secondary);
+    transition: width 0.3s ease;
+}
+
+.footerInfo a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .footerConteiner {
         flex-direction: column;
-        align-items: center;
-        gap: 0.5em;
+        text-align: center;
+        justify-content: center;
     }
-    .footerInfo>a{
-        margin-left: 0;
+
+    .footerInfo {
+        text-align: center;
     }
-    
+
+    .footerInfo a::after {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footerInfo a:hover::after {
+        left: 50%;
+        width: 100%;
+    }
 }
