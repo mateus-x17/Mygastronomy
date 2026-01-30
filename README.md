@@ -160,7 +160,7 @@ A aplicação estará disponível em `http://localhost:5173`.
 ## 📸 Screenshots
 
 - Página Inicial (Home)
-![Home](./screenShot/Pagina-home.png)
+![Home](./screenShot/Pagina-Home.png)
 - Cardápio de Pratos
 ![pratos](./screenShot/Pagina-pratos.png)
 - Modal de Detalhes do Prato
